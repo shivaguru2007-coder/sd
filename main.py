@@ -13,14 +13,8 @@ CHANNELS = ["@sglooter"]
 Mini_Withdraw = 2
 Paytmkeys = "key"
 mid = "key"
-paytmtoken = ""
+paytmtoken = "key"
 
-withonly = ["2", "5", "25", "50", "100"]
-Maxwith = telebot.types.ReplyKeyboardMarkup(True)
-Maxwith.row('0.1','2')
-Maxwith.row('5', '25')
-Maxwith.row('50', '100')
-Maxwith.row('🚫 Cancel') 
 
 botdata = json.load(open('panel.json', 'r'))
 admins = botdata['admins'] 
@@ -596,7 +590,7 @@ def send_text(message):
                     
                 if bal >= Mini_Withdraw:
                     bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
-                                     parse_mode="html", reply_markup=Maxwith)
+                                     parse_mode="html")
                     bot.register_next_step_handler(message, amo_with)
                 else:
                     bot.send_message(
