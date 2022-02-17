@@ -3,10 +3,10 @@
     "msgstart": "<b>👤To Use This Bot You Need To Join Our All Channels:- \n➡️ @pythonbotesting </b>",
     "username": {},
     "banned": [],
-    "refbonus": 0.5,
+    "refbonus": '',
     "admins": [
         "2044257366"
     ],
-    "bonus": 0.1,
+    "bonus": '',
     "contact": {}
 }
