@@ -577,8 +577,6 @@ def send_text(message):
                 user = str(user_id) 
 
                 data = json.load(open('paytmusers.json', 'r'))
-                cur_time = int((time.time()))
-          
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
@@ -593,7 +591,7 @@ def send_text(message):
                         text='✅ Set wallet', callback_data='setwallet'))
                     bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
                                      parse_mode="html", reply_markup=markup)
-                    return
+                    
                 if bal >= Mini_Withdraw:
                     bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                      parse_mode="html", reply_markup=Maxwith)
