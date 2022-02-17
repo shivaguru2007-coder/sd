@@ -15,6 +15,8 @@ Paytmkeys = "key"
 mid = "key"
 paytmtoken = "key"
 
+Maxwith = telebot.types.ReplyKeyboardMarkup(True)
+Maxwith.row('🚫 Cancel') 
 
 botdata = json.load(open('panel.json', 'r'))
 admins = botdata['admins'] 
@@ -590,7 +592,7 @@ def send_text(message):
                     
                 if bal >= Mini_Withdraw:
                     bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
-                                     parse_mode="html")
+                                     parse_mode="html", reply_markup=Maxwith) 
                     bot.register_next_step_handler(message, amo_with)
                 else:
                     bot.send_message(
@@ -686,6 +688,7 @@ def amo_with(message):
         bdata = json.load(open('panel.json', 'r'))
         msg_start = bdata['msgstart']
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
+        return
    except:
         bot.send_message(message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
         return
