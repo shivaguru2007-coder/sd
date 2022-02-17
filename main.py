@@ -659,7 +659,7 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if type(message) not int:   
+            if type(message) == int:   
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
