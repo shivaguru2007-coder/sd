@@ -243,7 +243,7 @@ def query_handler(call):
    try:
     ch = check(call.message.chat.id)
     if call.data == 'check':
-        if ch == True:
+        if ch is True:
             data = json.load(open('paytmusers.json', 'r'))
             user_id = call.message.chat.id
             user = str(user_id)
@@ -523,7 +523,7 @@ def send_text(message):
     if str(message.chat.id) not in bdata['contact']:
       bdata['contact'][str(message.chat.id)] = False
       json.dump(bdata, open('paytmusers.json', 'w'), indent=4)
-    if bdata['contact'][str(message.chat.id)] == True:
+    if bdata['contact'][str(message.chat.id)] is True:
       ch = check(message.chat.id)
       if ch is True:
         if message.chat.id == OWNER_ID:
@@ -694,7 +694,7 @@ def amo_with(message):
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
             cmsg = str(message.text.replace('.',''))
-            if cmsg.isdigit() == False:
+            if cmsg.isdigit() is False:
                 pass
             else:
                 bot.send_message(user_id, "⚠️ Invalid Amount")
