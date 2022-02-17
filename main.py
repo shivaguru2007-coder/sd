@@ -10,9 +10,9 @@ PAYMENT_CHANNEL = "@sglooter"
 OWNER_ID = 2044257366
 CHANNELS = ["@sglooter"]
 Mini_Withdraw = 2
-Paytmkeys = "35D2794FC25D5314D94D847DE2616"
-mid = "A1D7E9541C63CA4C"
-paytmtoken = "l4zMPynaA2cNGp0r"
+Paytmkeys = "Key"
+mid = "Key"
+paytmtoken = "Key"
 
 withonly = ["2", "5", "25", "50", "100"]
 Maxwith = telebot.types.ReplyKeyboardMarkup(True)
