@@ -1,3 +1,4 @@
+from email.message import Message
 import time
 import json
 import telebot
@@ -12,7 +13,7 @@ CHANNELS = ["@sglooter"]
 Mini_Withdraw = 2
 Paytmkeys = "key"
 mid = "key"
-paytmtoken = "key"
+paytmtoken = ""
 
 withonly = ["2", "5", "25", "50", "100"]
 Maxwith = telebot.types.ReplyKeyboardMarkup(True)
