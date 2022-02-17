@@ -659,18 +659,10 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if message.text == "1":
-                pass
-            elif message.text == "5":
-                pass
-            elif message.text == "25":
-                pass
-            elif message.text == "50":
-                pass
-            elif message.text == "100":
-                pass
+            if str(message).text.isdigit() == True:
+                bot.send_message(user_id, "⚠️ DON'T ENTER RANDOM VALUES. ")
             else:
-                bot.send_message(user_id, "⚠️ WITHDRAW ONLY 1,5,25,100 INR ONLY")
+
                 bot.register_next_step_handler(message, amo_with)
                 return
             if user not in data['balance']:
