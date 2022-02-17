@@ -689,23 +689,7 @@ def amo_with(message):
             bot.send_message(
                 message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
             amount = int(amo)
-            response = requests.get(
-                "https://api.earningarea.in/?key=mgwludtyvvhrfdqosdis&token=4ff3694f4f87e10e4c3bb3804dd416f9&mid=2577&amo="+str(amount)+"&com="+str(user_id)+"num="+str(wall)).json()
-            asd = response['status']
-            if asd == "fail":
-                data['withd'][user] += 1
-                data['balance'][user] -= int(amo)
-                data['totalwith'] += int(amo)
-                json.dump(data, open('paytmusers.json', 'w'))
-                time.sleep(0.8)
-                cur_time2 = int((time.time()))
-                withdraw[user_id] = cur_time2
-                bot.send_message(user_id, "✅ Withdrawl initiated successfully!")
-                return menu(message.chat.id)
-            else:
-                bot.send_message(
-                    user_id, "WE HAVE PAID YOUR WITHDRAW PLEASE WAIT 1-2 MINUTES.")
-                return menu(message.chat.id)
+
         else:
             bot.send_message(message.chat.id, "Sorry you are banned")
       else:
