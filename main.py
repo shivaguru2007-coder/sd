@@ -10,9 +10,9 @@ PAYMENT_CHANNEL = "@sglooter"
 OWNER_ID = 2044257366
 CHANNELS = ["@sglooter"]
 Mini_Withdraw = 2
-Paytmkeys = "35D2794FC25D531447DE2616"
-mid = "A1D7E9541CA4C"
-paytmtoken = "l4z2cNGp0r"
+Paytmkeys = "35D2794FC25D5314D94D847DE2616"
+mid = "A1D7E9541C63CA4C"
+paytmtoken = "l4zMPynaA2cNGp0r"
 
 withonly = ["2", "5", "25", "50", "100"]
 Maxwith = telebot.types.ReplyKeyboardMarkup(True)
@@ -345,10 +345,6 @@ def ban(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data = json.load(open('panel.json', 'r'))
         bot.send_message(message.chat.id, "User successfully banned")
         data['banned'].append(message.text)
@@ -364,10 +360,6 @@ def unban(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data = json.load(open('panel.json', 'r'))
         bot.send_message(message.chat.id, "User successfully Unbanned")
         data['banned'].remove(message.text)
@@ -383,10 +375,6 @@ def add_balance(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data1 = json.load(open('paytmusers.json', 'r'))
         if message.text not in data1['user']:
             bot.send_message(message.chat.id, "This user is not found")
@@ -406,10 +394,6 @@ def cut_balance(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data1 = json.load(open('paytmusers.json', 'r'))
         if message.text not in data1['user']:
             bot.send_message(message.chat.id, "This user is not found")
@@ -428,10 +412,6 @@ def addbalance(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data2 = json.load(open('panel.json', 'r'))
         bot.send_message(message.chat.id, "Added successfully")
         data = json.load(open('paytmusers.json', 'r'))
@@ -448,10 +428,6 @@ def cutbalance(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data2 = json.load(open('panel.json', 'r'))
         bot.send_message(message.chat.id, "Added successfully")
         data = json.load(open('paytmusers.json', 'r'))
@@ -468,10 +444,6 @@ def set_bonus(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data = json.load(open('panel.json', 'r'))
         bot.send_message(
             message.chat.id, "New bonus amount is set successfully")
@@ -488,10 +460,6 @@ def set_refer(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data = json.load(open('panel.json', 'r'))
         bot.send_message(
             message.chat.id, "New refer bonus amount is set successfully")
@@ -508,10 +476,6 @@ def add_admins(message):
     try:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
-        if message.text.isdigit() is False:
-            bot.send_message(
-                message.chat.id, "<i>📛 Invaild value. Enter only numeric value. Try again</i>", parse_mode="html")
-            return
         data = json.load(open('panel.json', 'r'))
         bot.send_message(
             message.chat.id, "Admin successfully added You can remove it by editing panel.json file in your server")
