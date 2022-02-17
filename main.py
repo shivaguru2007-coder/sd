@@ -5,15 +5,21 @@ import requests
 
 TOKEN = "PAYTM CASH"
 AIRDROP = "Nothing"
-BOT_TOKEN = "5144589024:AAEZNRG92KCKGc1j1ynsnjbVH5rRapGw1x4"
-PAYMENT_CHANNEL = "@pythonbotesting"
-OWNER_ID = 1235084297
-CHANNELS = ["@pythonbotesting"]
-Mini_Withdraw = 1
+BOT_TOKEN = "5049149165:AAEA95mYTUzazaewU4sp9ouk5GrIMUkjTxk"
+PAYMENT_CHANNEL = "@sglooter"
+OWNER_ID = 2044257366
+CHANNELS = ["@sglooter"]
+Mini_Withdraw = 2
 Paytmkeys = "35D2794FC25D5314D94D847DE2616"
 mid = "A1D7E9541C63CA4C"
 paytmtoken = "l4zMPynaA2cNGp0r"
 
+withonly = ["2", "5", "25", "50", "100"]
+Maxwith = telebot.types.ReplyKeyboardMarkup(True)
+Maxwith.row('0.1','2')
+Maxwith.row('5', '25')
+Maxwith.row('50', '100')
+Maxwith.row('🚫 Cancel') 
 
 botdata = json.load(open('panel.json', 'r'))
 admins = botdata['admins'] 
@@ -283,7 +289,7 @@ def query_handler(call):
 #            cur_time2 = int((time.time()))
 #            withdraw[user_id] = cur_time2
         bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!")
-        bot.send_message(PAYMENT_CHANNEL, "❣️ <b>New withdraw successfully!!\n\n🍕 Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : @"+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username, parse_mode="html")
+        bot.send_message(PAYMENT_CHANNEL, "❣️ <b>New withdraw successfully!!\n\n🍕 Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username, parse_mode="html")
         return menu(message.chat.id)
 #            else:
 #                bot.send_message(
@@ -369,7 +375,7 @@ def unban(message):
         time.sleep(0.8)
     except:
         bot.send_message(
-            message.chat.id, "This user is may not banned if you not sure you can contact our dev @khushi_2607")
+            message.chat.id, "This user is may not banned if you not sure you can contact our dev @gaamaaala_0705")
         return
 
 
@@ -595,7 +601,7 @@ def send_text(message):
             user_id = message.chat.id
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @khushi_2607 Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
+            msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @gaamaaala_0705 Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
             msg = msg.format(data['total'], data['totalwith'], TOKEN)
             bot.send_message(user_id, msg, parse_mode="html")
             return
@@ -693,11 +699,20 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            cmsg = str(message.text.replace('.',''))
-            if cmsg.isdigit() == False:
+            if message.text == "2":
+                pass
+            elif message.text == "0.1":
+                pass
+            elif message.text == "5":
+                pass
+            elif message.text == "25":
+                pass
+            elif message.text == "50":
+                pass
+            elif message.text == "100":
                 pass
             else:
-                bot.send_message(user_id, "⚠️ Invalid Amount")
+                bot.send_message(user_id, "⚠️ WITHDRAW ONLY 2,5,25,100 INR ONLY")
                 bot.register_next_step_handler(message, amo_with)
                 return
             if user not in data['balance']:
