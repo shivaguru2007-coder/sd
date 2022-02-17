@@ -10,9 +10,9 @@ PAYMENT_CHANNEL = "@sglooter"
 OWNER_ID = 2044257366
 CHANNELS = ["@sglooter"]
 Mini_Withdraw = 2
-Paytmkeys = "Key"
-mid = "Key"
-paytmtoken = "Key"
+Paytmkeys = "key"
+mid = "key"
+paytmtoken = "key"
 
 withonly = ["2", "5", "25", "50", "100"]
 Maxwith = telebot.types.ReplyKeyboardMarkup(True)
@@ -279,7 +279,7 @@ def query_handler(call):
         data = json.load(open('paytmusers.json', 'r'))
         amount = float(call.data.split("_")[1])
         wallet = str(data['wallet'][user])
-        response = requests.get("https://job2all.xyz/api/index.php?mid=A1D7E9541C63CA4C&mkey=35D2794FC25D5314D94D847DE2616&guid=RfniID8VpKcASTgoS5jCFsnFguPMlGY&mob="+str(wallet)+"&amount="+str(amount)+"")
+        response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"")
 #            asd = response['status']
 #            if asd == "fail":
         data['balance'][user] -= float(amount)
@@ -367,7 +367,7 @@ def unban(message):
         time.sleep(0.8)
     except:
         bot.send_message(
-            message.chat.id, "This user is may not banned if you not sure you can contact our dev @gaamaaala_0705")
+            message.chat.id, "This user is may not banned if you not sure you can contact our dev @SGking27_xd")
         return
 
 
@@ -565,7 +565,7 @@ def send_text(message):
             user_id = message.chat.id
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @gaamaaala_0705 Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
+            msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @SGking27_xd Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
             msg = msg.format(data['total'], data['totalwith'], TOKEN)
             bot.send_message(user_id, msg, parse_mode="html")
             return
