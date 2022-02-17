@@ -659,7 +659,9 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if type(message) not int:   
+            if type(message) == int:   
+                bot.send_message(user_id,"Don't send randomvalues")
+            else: 
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
@@ -675,9 +677,7 @@ def amo_with(message):
                     return menu(message.chat.id)
                 bot.send_message(
                     message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
-                amount = int(amo)
-            else: 
-                bot.send_message(user_id,"Don't send randomvalues")    
+                amount = int(amo)                    
         else:
             bot.send_message(message.chat.id, "Sorry you are banned")
       else:
