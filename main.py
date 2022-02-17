@@ -573,12 +573,12 @@ def send_text(message):
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
         if message.text == "💳 Withdraw":
-            user_id = message.chat.id
-            user = str(user_id) 
+                user_id = message.chat.id
+                user = str(user_id) 
 
-            data = json.load(open('paytmusers.json', 'r'))
-            cur_time = int((time.time()))
-            if (user_id not in withdraw.keys()) or (cur_time - withdraw[user_id] > 60):
+                data = json.load(open('paytmusers.json', 'r'))
+                cur_time = int((time.time()))
+          
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
@@ -602,10 +602,8 @@ def send_text(message):
                     bot.send_message(
                         user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
                     return
-            else:
-                bot.send_message(
-                    message.chat.id, "<b>❌ You can do only 1 withdraw in 24 hours!</b>", parse_mode="html")
-                return
+            
+
       else:
         markups = telebot.types.InlineKeyboardMarkup()
         markups.add(telebot.types.InlineKeyboardButton(text='☑️ Joined', callback_data='check'))
@@ -664,44 +662,29 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if message.text == "2":
-                pass
-            elif message.text == "0.1":
-                pass
-            elif message.text == "5":
-                pass
-            elif message.text == "25":
-                pass
-            elif message.text == "50":
-                pass
-            elif message.text == "100":
-                pass
-            else:
-                bot.send_message(user_id, "⚠️ WITHDRAW ONLY 2,5,25,100 INR ONLY")
-                bot.register_next_step_handler(message, amo_with)
-                return
-            if user not in data['balance']:
-                data['balance'][user] = 0
-            if user not in data['wallet']:
-                data['wallet'][user] = "none"
-            json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
-            bal = data['balance'][user]
-            wall = data['wallet'][user]
-            msg = message.text
-            if float(message.text) > float(bal):
+            if str(message).text.isdigit() == False:
+                if user not in data['balance']:
+                    data['balance'][user] = 0
+                if user not in data['wallet']:
+                    data['wallet'][user] = "none"
+                json.dump(data, open('paytmusers.json', 'w'), indent=4)
+                time.sleep(0.8)
+                bal = data['balance'][user]
+                wall = data['wallet'][user]
+                msg = message.text
+                if float(message.text) > float(bal):
+                    bot.send_message(
+                        user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
+                    return menu(message.chat.id)
                 bot.send_message(
-                    user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
-                return menu(message.chat.id)
-            bot.send_message(
-                message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
-            amount = float(amo)
-            mess = "<i>For, A success withdrawal You need to confirm the Withdrawal</i>\n\n⚠️ <b>You are Withdrawing</b> "+str(format(float(amo), '.8f'))+" <b>Paytm Cash</b> to the \n<code>"+str(wall)+"</code> <b>Paytm wallet\n\n✅ Please Check the Withdraw details Before <u>Confirm the withdraw</u></b>"
-            markup = telebot.types.InlineKeyboardMarkup()
-            markup.add(telebot.types.InlineKeyboardButton(text='✅ Confirm Withdraw', callback_data='confirmwith_'+str(amo)))
-            bot.send_message(user,mess,parse_mode='html',reply_markup=markup)
-        else:
-            bot.send_message(message.chat.id, "Sorry you are banned")
+                    message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
+                amount = float(amo)
+                mess = "<i>For, A success withdrawal You need to confirm the Withdrawal</i>\n\n⚠️ <b>You are Withdrawing</b> "+str(format(float(amo), '.8f'))+" <b>Paytm Cash</b> to the \n<code>"+str(wall)+"</code> <b>Paytm wallet\n\n✅ Please Check the Withdraw details Before <u>Confirm the withdraw</u></b>"
+                markup = telebot.types.InlineKeyboardMarkup()
+                markup.add(telebot.types.InlineKeyboardButton(text='✅ Confirm Withdraw', callback_data='confirmwith_'+str(amo)))
+                bot.send_message(user,mess,parse_mode='html',reply_markup=markup)
+            else:
+                bot.send_message(message.chat.id, "Sorry you are banned")
       else:
         markups = telebot.types.InlineKeyboardMarkup()
         markups.add(telebot.types.InlineKeyboardButton(text='☑️ Joined', callback_data='check'))
