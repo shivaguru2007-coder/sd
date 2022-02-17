@@ -562,6 +562,8 @@ def send_text(message):
                 bot.send_message(
                     message.chat.id, "<b>❌You can only take bonus once every 24 hours!</b>", parse_mode="html")
             return
+        if message.text == "st": 
+            print(data)  
         if message.text == "📊 Statistics":
             user_id = message.chat.id
             user = str(user_id)
@@ -608,6 +610,7 @@ def send_text(message):
         bdata = json.load(open('panel.json', 'r'))
         msg_start = bdata['msgstart']
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
+        return
     else:
         bot.send_message(message.chat.id,"<b>You cannot use this commands before verification</b>",parse_mode='html')
    except:
