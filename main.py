@@ -659,7 +659,12 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-
+            for char in message:
+                if char is  char.isalpha():
+                    bot.send_message(user_id,"Don't Send random values")
+                    return
+                else: 
+                    pass
             if user not in data['balance']:
                 data['balance'][user] = 0
             if user not in data['wallet']:
