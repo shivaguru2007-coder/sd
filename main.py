@@ -663,8 +663,7 @@ def amo_with(message):
                 if char is  char.isalpha():
                     bot.send_message(user_id,"Don't Send random values")
                     return
-                else: 
-                    pass
+                
             if user not in data['balance']:
                 data['balance'][user] = 0
             if user not in data['wallet']:
