@@ -651,6 +651,7 @@ def amo_with(message):
    try:
       ch = check(message.chat.id)
       if ch == True:
+        bot.send_message(user_id,message.text)
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
         data = json.load(open('panel.json', 'r'))
