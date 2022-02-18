@@ -661,27 +661,26 @@ def amo_with(message):
             data = json.load(open('paytmusers.json', 'r'))
             cmsg = str(message.text.replace('.',''))
             if cmsg.isdigit() == False:
-                pass
-            else:
                 bot.send_message(user_id, "⚠️ Invalid Amount")
                 bot.register_next_step_handler(message, amo_with)
-                return           
-            if user not in data['balance']:
-                data['balance'][user] = 0
-            if user not in data['wallet']:
-                data['wallet'][user] = "none"
-            json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
-            bal = data['balance'][user]
-            wall = data['wallet'][user]
-            msg = message.text
-            if int(message.text) > bal:
+                return
+            else:               
+                if user not in data['balance']:
+                    data['balance'][user] = 0
+                if user not in data['wallet']:
+                    data['wallet'][user] = "none"
+                json.dump(data, open('paytmusers.json', 'w'), indent=4)
+                time.sleep(0.8)
+                bal = data['balance'][user]
+                wall = data['wallet'][user]
+                msg = message.text
+                if int(message.text) > bal:
+                    bot.send_message(
+                        user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
+                    return menu(message.chat.id)
                 bot.send_message(
-                    user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
-                return menu(message.chat.id)
-            bot.send_message(
-                message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
-            amount = int(amo)                    
+                    message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
+                amount = int(amo)                    
         else:
             bot.send_message(message.chat.id, "Sorry you are banned")
       else:
