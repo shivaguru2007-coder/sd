@@ -655,14 +655,17 @@ def amo_with(message):
             return menu(message.chat.id)
         data = json.load(open('panel.json', 'r'))
         if message.chat.id not in data['banned']:
-            user_id = message.chat.id
-            amo = message.text
-            user = str(user_id)
-            data = json.load(open('paytmusers.json', 'r'))
-            mess = float(amo)
-            if type(mess) is int or type(mess) is float:   
-                bot.send_message(user_id,"Don't send random values")
-            else: 
+                user_id = message.chat.id
+                amo = message.text
+                user = str(user_id)
+                data = json.load(open('paytmusers.json', 'r'))
+                cmsg = str(message.text.replace('.',''))
+                if cmsg.isdigit() == False:
+                    pass
+                else:
+                    bot.send_message(user_id, "⚠️ Invalid Amount")
+                    bot.register_next_step_handler(message, amo_with)
+                    return 
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
