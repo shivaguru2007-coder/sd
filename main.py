@@ -567,7 +567,6 @@ def send_text(message):
             msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @SGking27_xd Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
             msg = msg.format(data['total'], data['totalwith'], TOKEN)
             bot.send_message(user_id, msg, parse_mode="html")
-            return
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
         if message.text == "💳 Withdraw":
@@ -659,7 +658,8 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if type(message) == str:   
+            mess = float(message)
+            if type(message.text) == str:   
                 bot.send_message(user_id,"Don't send random values")
             else: 
                 if user not in data['balance']:
