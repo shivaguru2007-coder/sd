@@ -1,6 +1,7 @@
 from email.message import Message
 import time
 import json
+from numpy import integer
 import telebot
 import requests 
 
@@ -658,8 +659,8 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            mess = float(message)
-            if type(mess) == str:   
+            mess = float(amo)
+            if type(mess) is int or type(mess) is float:   
                 bot.send_message(user_id,"Don't send random values")
             else: 
                 if user not in data['balance']:
