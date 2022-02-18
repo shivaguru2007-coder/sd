@@ -1,7 +1,6 @@
 from email.message import Message
 import time
 import json
-from numpy import integer
 import telebot
 import requests 
 
@@ -568,6 +567,7 @@ def send_text(message):
             msg = "<b>📊 Total members : {} Users\nThis Bot is Made By @SGking27_xd Dm me To buy\n💎 Total successful Withdraw : {} {}</b>"
             msg = msg.format(data['total'], data['totalwith'], TOKEN)
             bot.send_message(user_id, msg, parse_mode="html")
+            return
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
         if message.text == "💳 Withdraw":
@@ -655,17 +655,13 @@ def amo_with(message):
             return menu(message.chat.id)
         data = json.load(open('panel.json', 'r'))
         if message.chat.id not in data['banned']:
-                user_id = message.chat.id
-                amo = message.text
-                user = str(user_id)
-                data = json.load(open('paytmusers.json', 'r'))
-                cmsg = str(message.text.replace('.',''))
-                if cmsg.isdigit() == False:
-                    pass
-                else:
-                    bot.send_message(user_id, "⚠️ Invalid Amount")
-                    bot.register_next_step_handler(message, amo_with)
-                    return 
+            user_id = message.chat.id
+            amo = message.text
+            user = str(user_id)
+            data = json.load(open('paytmusers.json', 'r'))
+            if type(message) == int:   
+                bot.send_message(user_id,"Don't send randomvalues")
+            else: 
                 if user not in data['balance']:
                     data['balance'][user] = 0
                 if user not in data['wallet']:
