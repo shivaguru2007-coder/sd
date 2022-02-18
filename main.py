@@ -659,7 +659,7 @@ def amo_with(message):
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
             mess = float(message)
-            if type(message.text) == str:   
+            if type(mess) == str:   
                 bot.send_message(user_id,"Don't send random values")
             else: 
                 if user not in data['balance']:
