@@ -1,4 +1,3 @@
-from email.message import Message
 import time
 import json
 import telebot
@@ -661,7 +660,7 @@ def amo_with(message):
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
             cmsg = str(message.text.replace('.',''))
-            if cmsg.isdigit() == False:
+            if cmsg.isdigit() == True:
                 bot.send_message(user_id, "⚠️ Invalid Amount")
                 bot.register_next_step_handler(message, amo_with)
                 return
