@@ -659,8 +659,8 @@ def amo_with(message):
             amo = message.text
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            if type(message) == int:   
-                bot.send_message(user_id,"Don't send randomvalues")
+            if type(message) == int or type(message) == float:   
+                bot.send_message(user_id,"Don't send random values")
             else: 
                 if user not in data['balance']:
                     data['balance'][user] = 0
