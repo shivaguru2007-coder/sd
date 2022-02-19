@@ -1,4 +1,4 @@
-from email.message import Message
+import random
 import time
 import json
 import telebot
@@ -542,7 +542,7 @@ def send_text(message):
             bot.register_next_step_handler(message, trx_address)
         if message.text == "🎁 Bonus":
             botdata = json.load(open('panel.json', 'r'))
-            Daily_bonus = float(botdata['bonus'])
+            Daily_bonus =  round(random.uniform(0.1, 0.5),2)
             user_id = message.chat.id
             user = str(user_id)
             cur_time = int((time.time()))
