@@ -591,8 +591,9 @@ def send_text(message):
                                     parse_mode="html", reply_markup=markup)
                 return
             if bal is 0:
-                bot.send_message(user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
-                return
+                bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
+                                    parse_mode="html")
+                return menu(message.chat.id)
             if bal >= Mini_Withdraw:
                 bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                     parse_mode="html", reply_markup=Maxwith)
