@@ -183,7 +183,7 @@ def contact(contact):
                 time.sleep(0.5)
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
                 botdata = json.load(open('panel.json', 'r'))
-                Per_Refer = float(botdata['refbonus'])
+                Per_Refer = float(round( random.uniform(0.5 , 0.75),2))
                 data['balance'][ref] += float(Per_Refer)
                 data['referred'][ref] += 1
                 bot.send_message(
@@ -522,7 +522,7 @@ def send_text(message):
             user_id = message.chat.id
             user = str(user_id)
             botdata = json.load(open('panel.json', 'r'))
-            Per_Refer = str(botdata['refbonus'])
+            Per_Refer = "Random refer bonus 0.5 to 0.75"
             if user not in data['referred']:
                 data['referred'][user] = 0
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
