@@ -596,8 +596,7 @@ def send_text(message):
                                     parse_mode="html", reply_markup=Maxwith)
                 bot.register_next_step_handler(message, amo_with)
             if bal is 0:
-                bot.send_message(user_id, "<b>yor Balance is Low to Withdraw Mnimum Withdraw "+Mini_Withdraw+" rs</b>",
-                    parse_mode="html")
+                bot.send_message(user_id, "<b>yor Balance is Low to Withdraw Mnimum Withdraw 1 rs</b>",parse_mode="html")
                 return menu(message.chatid)    
  
       else:
@@ -608,7 +607,7 @@ def send_text(message):
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
    except:
       bot.send_message(
-          message.chat.id, "An error has been occupied to our server pls wait sometime and try again \n\n Possible Reasons: \n\n 1. You have too low balance Withdraw \n Minimum Withdraw Is 1 Rs \n\n 2. If U have enough balanceContact Dev : @sgkking27_xd")
+          message.chat.id, "An error has been occupied to our server pls wait sometime and try again \n\n Possible Reasons: \n\n 1. You have too low balance Withdraw \n Minimum Withdraw Is 1 Rs \n\n 2. If U have enough balanceContact Dev : @sgking27_xd")
       return
 
 def trx_address(message):
