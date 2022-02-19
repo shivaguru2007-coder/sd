@@ -4,13 +4,13 @@ import json
 import telebot
 import requests 
 
-TOKEN = "PAYTM CASH"
+TOKEN = "Rupees "
 AIRDROP = "Nothing"
 BOT_TOKEN = "5049149165:AAEA95mYTUzazaewU4sp9ouk5GrIMUkjTxk"
 PAYMENT_CHANNEL = "@sglooter"
 OWNER_ID = 2044257366
 CHANNELS = ["@sglooter"]
-Mini_Withdraw = 2
+Mini_Withdraw = 1
 Paytmkeys = "key"
 mid = "key"
 paytmtoken = "key"
@@ -573,36 +573,29 @@ def send_text(message):
         if message.text == "💳 Withdraw":
             user_id = message.chat.id
             user = str(user_id)
-
             data = json.load(open('paytmusers.json', 'r'))
-            cur_time = int((time.time()))
-            if (user_id not in withdraw.keys()) or (cur_time - withdraw[user_id] > 60):
-                if user not in data['balance']:
-                    data['balance'][user] = 0
-                if user not in data['wallet']:
-                    data['wallet'][user] = "none"
-                json.dump(data, open('paytmusers.json', 'w'), indent=4)
-                time.sleep(0.8)
-                bal = data['balance'][user]
-                wall = data['wallet'][user]
-                if wall == "none":
-                    markup = telebot.types.InlineKeyboardMarkup()
-                    markup.add(telebot.types.InlineKeyboardButton(
-                        text='✅ Set wallet', callback_data='setwallet'))
-                    bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
-                                     parse_mode="html", reply_markup=markup)
-                    return
-                if bal >= Mini_Withdraw:
-                    bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
-                                     parse_mode="html", reply_markup=Maxwith)
-                    bot.register_next_step_handler(message, amo_with)
-                else:
-                    bot.send_message(
-                        user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
-                    return
+            cur_time = int((time.time()))  
+            if user not in data['balance']:
+                data['balance'][user] = 0
+            if user not in data['wallet']:
+                data['wallet'][user] = "none"
+            json.dump(data, open('paytmusers.json', 'w'), indent=4)
+            time.sleep(0.8)
+            bal = data['balance'][user]
+            wall = data['wallet'][user]
+            if wall == "none":
+                markup = telebot.types.InlineKeyboardMarkup()
+                markup.add(telebot.types.InlineKeyboardButton(
+                    text='✅ Set wallet', callback_data='setwallet'))
+                bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
+                                    parse_mode="html", reply_markup=markup)
+                return
+            if bal >= Mini_Withdraw:
+                bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
+                                    parse_mode="html", reply_markup=Maxwith)
+                bot.register_next_step_handler(message, amo_with)
             else:
-                bot.send_message(
-                    message.chat.id, "<b>❌ You can do only 1 withdraw in 24 hours!</b>", parse_mode="html")
+                bot.send_message(user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
                 return
       else:
         markups = telebot.types.InlineKeyboardMarkup()
