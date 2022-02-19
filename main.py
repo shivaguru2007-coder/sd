@@ -595,7 +595,7 @@ def send_text(message):
                 bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                     parse_mode="html", reply_markup=Maxwith)
                 bot.register_next_step_handler(message, amo_with)
-            if bal is 0:
+            if bal < 1:
                 bot.send_message(user_id, "<b>your Balance is Low to Withdraw Mnimum Withdraw 1 rs</b>",parse_mode="html")
                 return menu(message.chatid)    
  
