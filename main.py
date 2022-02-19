@@ -590,14 +590,15 @@ def send_text(message):
                 bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
                                     parse_mode="html", reply_markup=markup)
                 return
-            if bal < Mini_Withdraw:
-                bot.send_message(user_id, "<b>yor Balance is Low to Withdraw Mnimum Withdraw "+Mini_Withdraw+"  rs</b>",
-                                    parse_mode="html")
-                return menu(message.chatid)
+
             if bal >= Mini_Withdraw:
                 bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                     parse_mode="html", reply_markup=Maxwith)
                 bot.register_next_step_handler(message, amo_with)
+            else:
+                bot.send_message(user_id, "<b>yor Balance is Low to Withdraw Mnimum Withdraw "+Mini_Withdraw+" rs</b>",
+                    parse_mode="html")
+                return menu(message.chatid)    
  
       else:
         markups = telebot.types.InlineKeyboardMarkup()
