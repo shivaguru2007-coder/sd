@@ -660,7 +660,7 @@ def amo_with(message):
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
             cmsg = str(message.text.replace('.',''))
-            if cmsg.isdigit() == False:
+            if cmsg.isdigit() == True:
                 pass
             else:
                 bot.send_message(user_id, "⚠️ Invalid Amount")
