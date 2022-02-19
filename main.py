@@ -1,3 +1,4 @@
+from email.message import Message
 import time
 import json
 import telebot
@@ -649,8 +650,7 @@ def trx_address(message):
 def amo_with(message):
    try:
       ch = check(message.chat.id)
-      if ch == True:
-        bot.send_message(user_id,message.text)
+      if ch is True:
         if message.text == "🚫 Cancel":
             return menu(message.chat.id)
         data = json.load(open('panel.json', 'r'))
@@ -660,27 +660,32 @@ def amo_with(message):
             user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
             cmsg = str(message.text.replace('.',''))
-            if cmsg.isdigit() == True:
+            if cmsg.isdigit() == False:
+                pass
+            else:
                 bot.send_message(user_id, "⚠️ Invalid Amount")
                 bot.register_next_step_handler(message, amo_with)
                 return
-            else:               
-                if user not in data['balance']:
-                    data['balance'][user] = 0
-                if user not in data['wallet']:
-                    data['wallet'][user] = "none"
-                json.dump(data, open('paytmusers.json', 'w'), indent=4)
-                time.sleep(0.8)
-                bal = data['balance'][user]
-                wall = data['wallet'][user]
-                msg = message.text
-                if int(message.text) > bal:
-                    bot.send_message(
-                        user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
-                    return menu(message.chat.id)
+            if user not in data['balance']:
+                data['balance'][user] = 0
+            if user not in data['wallet']:
+                data['wallet'][user] = "none"
+            json.dump(data, open('paytmusers.json', 'w'), indent=4)
+            time.sleep(0.8)
+            bal = data['balance'][user]
+            wall = data['wallet'][user]
+            msg = message.text
+            if float(message.text) > float(bal):
                 bot.send_message(
-                    message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
-                amount = int(amo)                    
+                    user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
+                return menu(message.chat.id)
+            bot.send_message(
+                message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
+            amount = float(amo)
+            mess = "<i>For, A success withdrawal You need to confirm the Withdrawal</i>\n\n⚠️ <b>You are Withdrawing</b> "+str(format(float(amo), '.8f'))+" <b>Paytm Cash</b> to the \n<code>"+str(wall)+"</code> <b>Paytm wallet\n\n✅ Please Check the Withdraw details Before <u>Confirm the withdraw</u></b>"
+            markup = telebot.types.InlineKeyboardMarkup()
+            markup.add(telebot.types.InlineKeyboardButton(text='✅ Confirm Withdraw', callback_data='confirmwith_'+str(amo)))
+            bot.send_message(user,mess,parse_mode='html',reply_markup=markup)
         else:
             bot.send_message(message.chat.id, "Sorry you are banned")
       else:
@@ -690,8 +695,7 @@ def amo_with(message):
         msg_start = bdata['msgstart']
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
    except:
-        bot.send_message(
-            message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
+        bot.send_message(message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
         return
 
 
