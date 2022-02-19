@@ -590,14 +590,14 @@ def send_text(message):
                 bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
                                     parse_mode="html", reply_markup=markup)
                 return
-            if bal < Mini_Withdraw:
+            if bal < 1:
                 bot.send_message(user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
                 return
             if bal >= Mini_Withdraw:
                 bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                     parse_mode="html", reply_markup=Maxwith)
                 bot.register_next_step_handler(message, amo_with)
-
+ 
       else:
         markups = telebot.types.InlineKeyboardMarkup()
         markups.add(telebot.types.InlineKeyboardButton(text='☑️ Joined', callback_data='check'))
@@ -606,7 +606,7 @@ def send_text(message):
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
    except:
       bot.send_message(
-          message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
+          message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
       return
 
 def trx_address(message):
