@@ -595,7 +595,7 @@ def send_text(message):
                 bot.send_message(user_id, "<b>Enter amount to withdraw Your paytm cash\n\nCurrent wallet: "+wall+"</b>",
                                     parse_mode="html", reply_markup=Maxwith)
                 bot.register_next_step_handler(message, amo_with)
-            else:
+            if bal is 0:
                 bot.send_message(user_id, "<b>yor Balance is Low to Withdraw Mnimum Withdraw "+Mini_Withdraw+" rs</b>",
                     parse_mode="html")
                 return menu(message.chatid)    
@@ -608,7 +608,7 @@ def send_text(message):
         bot.send_message(message.chat.id, msg_start,parse_mode="html", reply_markup=markups)
    except:
       bot.send_message(
-          message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
+          message.chat.id, "An error has been occupied to our server pls wait sometime and try again \n\n Possible Reasons: \n\n 1. You have too low balance Withdraw \n Minimum Withdraw Is 1 Rs \n\n 2. If U have enough balanceContact Dev : @sgkking27_xd")
       return
 
 def trx_address(message):
