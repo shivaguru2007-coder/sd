@@ -590,7 +590,7 @@ def send_text(message):
                 bot.send_message(user_id, "<b>⚠️ Your Wallet is</b> <code>Not set</code>\n‼️ <b>Please set your wallet first For withdraw</b>",
                                     parse_mode="html", reply_markup=markup)
                 return
-            if bal < 1:
+            if bal is 0:
                 bot.send_message(user_id, "<i>❌ Your balance low you should have at least "+Mini_Withdraw+" "+TOKEN+" to Withdraw</i>", parse_mode="html")
                 return
             if bal >= Mini_Withdraw:
