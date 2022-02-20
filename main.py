@@ -27,7 +27,7 @@ msg_start = botdata['msgstart']
 bot = telebot.TeleBot(BOT_TOKEN) 
 
 bonus = {}
-withdraw = {} 
+withdraw = {}
 
 setbonus_mess = "<b>🟣 Send new bonus amount to set Bonus in bot</b>"
 ban_mess = "<b>⚫️ Send user Telegram ID to ban the user</b>"
@@ -249,16 +249,14 @@ def query_handler(call):
    try:
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
-            try:
+            try:    
                 data = json.load(open('paytmusers.json', 'r'))
-                user_id = call.message.chat.id
-                user = str(user_id)
-                ref_id = int(data['referby'][user])
-                ref = str(ref_id)
+                
                 time.sleep(5)
                 bot.send_message(call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">ref</a></b>', parse_mode="html" ) 
             except:
-                bot.send_message(call.message.chat.id , "none" , parse_mode="html")
+                data = json.load(open('paytmusers.json', 'r'))
+                bot.send_message(call.message.chat.id , ""+data+"" , parse_mode="html")
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
