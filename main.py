@@ -258,13 +258,10 @@ def query_handler(call):
             if int(data['referby'][user]) != user_id:
                 ref_id = int(data['referby'][user])
                 ref = str(ref_id)
-                if ref not in data['balance']:
-                    data['balance'][ref] = 0
-                if ref not in data['referred']:
-                    data['referred'][ref] = 0
+  
                 time.sleep(0.5)
-            bot.send_message(
-              call.message.chat.id, "🚧 <b>You are invited by "+ref_id+" </b>", parse_mode="html")
+                bot.send_message(
+                    call.message.chat.id, "🚧 <b>You are invited by "+ref+" </b>", parse_mode="html")
 
             
         if call.data == 'check':
