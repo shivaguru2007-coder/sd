@@ -186,11 +186,11 @@ def contact(contact):
                 Per_Refer = float(round( random.uniform(0.5 , 0.75),2))
                 data['balance'][ref] += float(Per_Refer)
                 data['referred'][ref] += 1
-                keyboard = telebot.types.InlineKeyboardButton('✅ CHECK', callback_data='checkd')
+
+                keyboard = [[telebot.types.InlineKeyboardButton('✅ Check', callback_data='checkd')]]
                 markup9 = telebot.types.InlineKeyboardMarkup(keyboard)
-                bot.send_message(user, "<b>💹 TO CHECK WHO INVITED YOU , CLICK ON ✅ CHECK </b>",
-                         parse_mode="html", reply_markup=markup9)
-                #bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
+                bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
+                                parse_mode="html", reply_markup=markup9)
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
@@ -272,6 +272,9 @@ def query_handler(call):
                 text='☑️ Joined', callback_data='check'))
             bot.send_message(user, msg_start,
                              parse_mode="html", reply_markup=markup)
+    if call.data == 'checkd':
+        ref_id = int(data['referby'][user])
+        bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html" )                        
     if call.data.split("_")[0] == 'confirmwith':
         message = call.message
         user_id = message.chat.id
@@ -308,8 +311,6 @@ def query_handler(call):
         message = call.message
         bot.send_message(call.message.chat.id, ban_mess, parse_mode="html")
         bot.register_next_step_handler(message, ban)
-    if  call.data == "checkd":
-        bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
     if call.data == "unbanuser":
         message = call.message
         bot.send_message(call.message.chat.id, unban_mess,
