@@ -250,10 +250,10 @@ def query_handler(call):
 
         if call.data == 'checkd':
             try:
-                data = json.load(open('paytmusers.json', 'r'))
-                ref_id = int(data['referby'][user])
+                #data = json.load(open('paytmusers.json', 'r'))
+                #ref_id = int(data['referby'][user])
                 time.sleep(5)
-                bot.send_message(call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">'+ref_id+'</a></b>', parse_mode="html" ) 
+                bot.send_message(call.message.chat.id, '🚧 You are invited by ', parse_mode="html" ) 
             except:
                 bot.send_message(call.message.chat.id , "none" , parse_mode="html")
         if call.data == 'check':
