@@ -248,8 +248,8 @@ def query_handler(call):
    try:
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
-                bot.send_message(call.message.chat.ud, '🚧 <b>You are invited by' , parse_mode="html" ) 
-            
+          bot.send_message(
+              call.message.chat.id, "♻️ <b>Share Your Contact For Verification</b> \n\n<b><u>⚠️ We Never Share Your Contact To Anyone</u></b>", parse_mode="html")
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
