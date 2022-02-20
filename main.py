@@ -246,100 +246,100 @@ def panel(message):
 @bot.callback_query_handler(func=lambda call: True)
 def query_handler(call):
    try:
-    ch = check(call.message.chat.id)
-    if call.data == 'check':
-        if ch == True:
+        ch = check(call.message.chat.id)
+        if call.data == 'checkd':
+                ref_id = int(data['referby'][user])
+                bot.send_message(call.message.chat.ud, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html" ) 
+            
+        if call.data == 'check':
+            if ch == True:
+                data = json.load(open('paytmusers.json', 'r'))
+                user_id = call.message.chat.id
+                user = str(user_id)
+                bot.answer_callback_query(
+                    callback_query_id=call.id, text='✅ You joined.')
+                bot.delete_message(call.message.chat.id, call.message.message_id)
+                keyboard = telebot.types.ReplyKeyboardMarkup(True)
+                keyboard.row(telebot.types.KeyboardButton(
+                    "Send Your number", request_contact=True))
+                bot.send_message(
+                    call.message.chat.id, "♻️ <b>Share Your Contact For Verification</b> \n\n<b><u>⚠️ We Never Share Your Contact To Anyone</u></b>", reply_markup=keyboard, parse_mode="html")
+            else:
+                user_id = call.message.chat.id
+                user = str(user_id)
+                bot.answer_callback_query(
+                    callback_query_id=call.id, text='❌ You not Joined')
+                bot.delete_message(call.message.chat.id, call.message.message_id)
+                markup = telebot.types.InlineKeyboardMarkup()
+                markup.add(telebot.types.InlineKeyboardButton(
+                    text='☑️ Joined', callback_data='check'))
+                bot.send_message(user, msg_start,
+                                parse_mode="html", reply_markup=markup)
+                        
+        if call.data.split("_")[0] == 'confirmwith':
+            message = call.message
+            user_id = message.chat.id
+            user = str(user_id)
             data = json.load(open('paytmusers.json', 'r'))
-            user_id = call.message.chat.id
+            amount = float(call.data.split("_")[1])
+            wallet = str(data['wallet'][user])
+            response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"")
+    #            asd = response['status']
+    #            if asd == "fail":
+            data['balance'][user] -= float(amount)
+            data['totalwith'] += float(amount)
+            json.dump(data, open('paytmusers.json', 'w'))
+            time.sleep(0.8)
+    #            cur_time2 = int((time.time()))
+    #            withdraw[user_id] = cur_time2
+            bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!")
+            bot.send_message(PAYMENT_CHANNEL, "❣️ <b>New withdraw successfully!!\n\n🍕 Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username, parse_mode="html")
+            return menu(message.chat.id)
+    #            else:
+    #                bot.send_message(
+    #                    user_id, "WE HAVE PAID YOUR WITHDRAW PLEASE WAIT 1-2 MINUTES.")
+    #                return menu(message.chat.id)
+        if call.data == 'setwallet':
+            message = call.message
+            user_id = message.chat.id
             user = str(user_id)
-            bot.answer_callback_query(
-                callback_query_id=call.id, text='✅ You joined.')
-            bot.delete_message(call.message.chat.id, call.message.message_id)
             keyboard = telebot.types.ReplyKeyboardMarkup(True)
-            keyboard.row(telebot.types.KeyboardButton(
-                "Send Your number", request_contact=True))
-            bot.send_message(
-                call.message.chat.id, "♻️ <b>Share Your Contact For Verification</b> \n\n<b><u>⚠️ We Never Share Your Contact To Anyone</u></b>", reply_markup=keyboard, parse_mode="html")
-        else:
-            user_id = call.message.chat.id
-            user = str(user_id)
-            bot.answer_callback_query(
-                callback_query_id=call.id, text='❌ You not Joined')
-            bot.delete_message(call.message.chat.id, call.message.message_id)
-            markup = telebot.types.InlineKeyboardMarkup()
-            markup.add(telebot.types.InlineKeyboardButton(
-                text='☑️ Joined', callback_data='check'))
-            bot.send_message(user, msg_start,
-                             parse_mode="html", reply_markup=markup)
-    if call.data == 'checkd':
-
-        ref_id = int(data['referby'][user])
-
-        bot.send_message(call.message.chat.ud, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html" )                        
-    if call.data.split("_")[0] == 'confirmwith':
-        message = call.message
-        user_id = message.chat.id
-        user = str(user_id)
-        data = json.load(open('paytmusers.json', 'r'))
-        amount = float(call.data.split("_")[1])
-        wallet = str(data['wallet'][user])
-        response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"")
-#            asd = response['status']
-#            if asd == "fail":
-        data['balance'][user] -= float(amount)
-        data['totalwith'] += float(amount)
-        json.dump(data, open('paytmusers.json', 'w'))
-        time.sleep(0.8)
-#            cur_time2 = int((time.time()))
-#            withdraw[user_id] = cur_time2
-        bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!")
-        bot.send_message(PAYMENT_CHANNEL, "❣️ <b>New withdraw successfully!!\n\n🍕 Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username, parse_mode="html")
-        return menu(message.chat.id)
-#            else:
-#                bot.send_message(
-#                    user_id, "WE HAVE PAID YOUR WITHDRAW PLEASE WAIT 1-2 MINUTES.")
-#                return menu(message.chat.id)
-    if call.data == 'setwallet':
-        message = call.message
-        user_id = message.chat.id
-        user = str(user_id)
-        keyboard = telebot.types.ReplyKeyboardMarkup(True)
-        keyboard.row('🚫 Cancel')
-        send = bot.send_message(message.chat.id, "<b>Enter A Valid Paytm Number</b>",
-                                parse_mode="html", reply_markup=keyboard)
-        bot.register_next_step_handler(message, trx_address)
-    if call.data == "banuser":
-        message = call.message
-        bot.send_message(call.message.chat.id, ban_mess, parse_mode="html")
-        bot.register_next_step_handler(message, ban)
-    if call.data == "unbanuser":
-        message = call.message
-        bot.send_message(call.message.chat.id, unban_mess,
-                         parse_mode="html")
-        bot.register_next_step_handler(message, unban)
-    if call.data == "addbalance":
-        message = call.message
-        bot.send_message(call.message.chat.id, add_mess, parse_mode="html")
-        bot.register_next_step_handler(message, add_balance)
-    if call.data == "cutbalance":
-        message = call.message
-        bot.send_message(call.message.chat.id, cut_mess, parse_mode="html")
-        bot.register_next_step_handler(message, cut_balance)
-    if call.data == "setrefer":
-        message = call.message
-        bot.send_message(call.message.chat.id, setref_mess,
-                         parse_mode="html")
-        bot.register_next_step_handler(message, set_refer)
-    if call.data == "setbonus":
-        message = call.message
-        bot.send_message(call.message.chat.id, setbonus_mess,
-                         parse_mode="html")
-        bot.register_next_step_handler(message, set_bonus)
-    if call.data == "addadmins":
-        message = call.message
-        bot.send_message(call.message.chat.id, addadmin_mess,
-                         parse_mode="html")
-        bot.register_next_step_handler(message, add_admins)
+            keyboard.row('🚫 Cancel')
+            send = bot.send_message(message.chat.id, "<b>Enter A Valid Paytm Number</b>",
+                                    parse_mode="html", reply_markup=keyboard)
+            bot.register_next_step_handler(message, trx_address)
+        if call.data == "banuser":
+            message = call.message
+            bot.send_message(call.message.chat.id, ban_mess, parse_mode="html")
+            bot.register_next_step_handler(message, ban)
+        if call.data == "unbanuser":
+            message = call.message
+            bot.send_message(call.message.chat.id, unban_mess,
+                            parse_mode="html")
+            bot.register_next_step_handler(message, unban)
+        if call.data == "addbalance":
+            message = call.message
+            bot.send_message(call.message.chat.id, add_mess, parse_mode="html")
+            bot.register_next_step_handler(message, add_balance)
+        if call.data == "cutbalance":
+            message = call.message
+            bot.send_message(call.message.chat.id, cut_mess, parse_mode="html")
+            bot.register_next_step_handler(message, cut_balance)
+        if call.data == "setrefer":
+            message = call.message
+            bot.send_message(call.message.chat.id, setref_mess,
+                            parse_mode="html")
+            bot.register_next_step_handler(message, set_refer)
+        if call.data == "setbonus":
+            message = call.message
+            bot.send_message(call.message.chat.id, setbonus_mess,
+                            parse_mode="html")
+            bot.register_next_step_handler(message, set_bonus)
+        if call.data == "addadmins":
+            message = call.message
+            bot.send_message(call.message.chat.id, addadmin_mess,
+                            parse_mode="html")
+            bot.register_next_step_handler(message, add_admins)
    except:
         bot.send_message(call.message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
         return
