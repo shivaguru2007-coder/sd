@@ -247,12 +247,15 @@ def panel(message):
 def query_handler(call):
    try:
         ch = check(call.message.chat.id)
+
         if call.data == 'checkd':
+            try:
                 data = json.load(open('paytmusers.json', 'r'))
                 ref_id = int(data['referby'][user])
                 time.sleep(5)
-                bot.send_message(call.message.chat.ud, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode='html' ) 
-            
+                bot.send_message(call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode='html' ) 
+            except:
+                bot.send_message(call.message.chat.id , "none" , parse_mode="html")
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
