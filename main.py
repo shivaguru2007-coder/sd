@@ -257,7 +257,7 @@ def query_handler(call):
                     jso = json.load(f)
                     user_id = call.message.chat.id
                     user = str(user_id)
-                    ref_id = jso['referby'][user_id]
+                    ref_id = jso['referby'][user]
 
                 time.sleep("0.5")           
                 bot.send_message(
@@ -268,7 +268,8 @@ def query_handler(call):
                     jso = json.load(f)
                     user_id = call.message.chat.id
                     user = str(user_id)
-                    ref_id = jso['referby'][user_id]
+                    ref_id = jso['referby'][user]
+                time.sleep("0.5") 
                 bot.send_message(call.message.chat.id , ""+ref_id+"" , parse_mode="html")
         if call.data == 'check':
             if ch == True:
