@@ -348,12 +348,15 @@ def query_handler(call):
 
 
 def sg(user1):
+    try:
         user = user1
         ref_id = int(data['referby'][user])
         ref = str(ref_id)
         time.sleep(0.5)
         bot.send_message(
-            str(user), "🚧 <b>You are invited by "+ref+" </b>", parse_mode="html")        
+          str(user), "🚧 <b>You are invited by "+ref+" </b>", parse_mode="html")        
+    except:
+        bot.send_message(user1 , "none")      
 def ban(message):
     try:
         if message.text == "🚫 Cancel":
