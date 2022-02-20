@@ -248,8 +248,21 @@ def query_handler(call):
    try:
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
-            ref = int(data['referby'][user])
-            ref_id = str(ref)
+          user = call.message.chat.id  
+          if user not in data['refer']:
+            data['refer'][user] = True
+
+            if user not in data['referby']:
+                data['referby'][user] = user
+                json.dump(data, open('paytmusers.json', 'w'), indent=4)
+            if int(data['referby'][user]) != user_id:
+                ref_id = int(data['referby'][user])
+                ref = str(ref_id)
+                if ref not in data['balance']:
+                    data['balance'][ref] = 0
+                if ref not in data['referred']:
+                    data['referred'][ref] = 0
+                time.sleep(0.5)
             bot.send_message(
               call.message.chat.id, "🚧 <b>You are invited by "+ref_id+" </b>", parse_mode="html")
 
