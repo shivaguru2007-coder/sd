@@ -258,13 +258,16 @@ def query_handler(call):
                 user = str(user_id)  
                 ref_id = int(data['referby'][user])
                 ref = str(ref_id) 
+
                 time.sleep("0.5")           
                 bot.send_message(
                     call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html") 
             except:
-                data = json.load(open('paytmusers.json', 'r'))
-                rs = data['referby']
-                bot.send_message(call.message.chat.id , ""+rs+"" , parse_mode="html")
+                
+                with open('paytmusers.json') as f:
+                    contents = f.read()
+                    
+                bot.send_message(call.message.chat.id , ""+contents+"" , parse_mode="html")
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
