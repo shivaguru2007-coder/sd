@@ -189,11 +189,11 @@ def contact(contact):
                 data['referred'][ref] += 1
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
-                bot.send_message(
-                    user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
+                #bot.send_message(
+                 #   user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
 
-                #bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
-                  #              parse_mode="html", reply_markup=markups)
+                bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
+                              parse_mode="html", reply_markup=markups)
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
@@ -254,10 +254,28 @@ def query_handler(call):
         if call.data == 'checkd':
             try:    
                 data = json.load(open('paytmusers.json', 'r'))
-                ref_id = int(data['referby'][user])
-                ref = str(ref_id)
+                user_id = call.message.chat.id
+                user = str(user_id)
+
+                data['contact'][user] = True
+                if user not in data['refer']:
+                    data['refer'][user] = True
+
+                    if user not in data['referby']:
+                        data['referby'][user] = user
+                        json.dump(data, open('paytmusers.json', 'w'), indent=4)
+                    if int(data['referby'][user]) != user_id:
+                        ref_id = int(data['referby'][user])
+                        ref = str(ref_id)
+                        if ref not in data['balance']:
+                            data['balance'][ref] = 0
+                        if ref not in data['referred']:
+                           data['referred'][ref] = 0
+                time.sleep(0.5)
+                json.dump(data, open('paytmusers.json', 'w'), indent=4)
                 time.sleep(5)
-                bot.send_message(call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">ref</a></b>', parse_mode="html" ) 
+                bot.send_message(
+                    call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html") 
             except:
                 data = json.load(open('paytmusers.json', 'r'))
                 bot.send_message(call.message.chat.id , ""+data+"" , parse_mode="html")
