@@ -189,8 +189,8 @@ def contact(contact):
                 data['referred'][ref] += 1
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
-                
-                bot.send_message(user_id, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">ref</a></b>', parse_mode="html" ) 
+                bot.send_message(
+                    user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
 
                 #bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
                   #              parse_mode="html", reply_markup=markups)
