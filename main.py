@@ -273,6 +273,7 @@ def query_handler(call):
             bot.send_message(user, msg_start,
                              parse_mode="html", reply_markup=markup)
     if call.data == 'checkd':
+        user_id = message.chat.id
         ref_id = int(data['referby'][user])
         bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html" )                        
     if call.data.split("_")[0] == 'confirmwith':
