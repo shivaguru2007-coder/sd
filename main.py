@@ -189,8 +189,11 @@ def contact(contact):
                 data['referred'][ref] += 1
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
-                bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
-                                parse_mode="html", reply_markup=markups)
+                
+                bot.send_message(user_id, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">ref</a></b>', parse_mode="html" ) 
+
+                #bot.send_message(user, "<b>💹 To Check Who Invited You , Click On ✅ Check</b>",
+                  #              parse_mode="html", reply_markup=markups)
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
