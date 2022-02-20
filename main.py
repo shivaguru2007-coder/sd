@@ -186,8 +186,11 @@ def contact(contact):
                 Per_Refer = float(round( random.uniform(0.5 , 0.75),2))
                 data['balance'][ref] += float(Per_Refer)
                 data['referred'][ref] += 1
-                bot.send_message(
-                    user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
+                keyboard = telebot.types.InlineKeyboardButton('✅ CHECK', callback_data='checkd')
+                markup9 = telebot.types.InlineKeyboardMarkup(keyboard)
+                bot.send_message(user_id, "<b>💹 TO CHECK WHO INVITED YOU , CLICK ON ✅ CHECK </b>",
+                         parse_mode="html", reply_markup=markup9)
+                #bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
@@ -305,6 +308,8 @@ def query_handler(call):
         message = call.message
         bot.send_message(call.message.chat.id, ban_mess, parse_mode="html")
         bot.register_next_step_handler(message, ban)
+    if  call.data == "checkd":
+        bot.send_message(user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
     if call.data == "unbanuser":
         message = call.message
         bot.send_message(call.message.chat.id, unban_mess,
@@ -542,7 +547,7 @@ def send_text(message):
             bot.register_next_step_handler(message, trx_address)
         if message.text == "🎁 Bonus":
             botdata = json.load(open('panel.json', 'r'))
-            Daily_bonus =  round(random.uniform(0.1, 0.25),2)
+            Daily_bonus =  round(random.uniform(0.1, 0.5),2)
             user_id = message.chat.id
             user = str(user_id)
             cur_time = int((time.time()))
