@@ -248,20 +248,9 @@ def query_handler(call):
    try:
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
-          user = call.message.chat.id  
-          if user not in data['refer']:
-            data['refer'][user] = True
-
-            if user not in data['referby']:
-                data['referby'][user] = user
-                json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            if int(data['referby'][user]) != user_id:
-                ref_id = int(data['referby'][user])
-                ref = str(ref_id)
-  
-                time.sleep(0.5)
-                bot.send_message(
-                    call.message.chat.id, "🚧 <b>You are invited by "+ref+" </b>", parse_mode="html")
+          user_id = call.message.chat.id
+          user = str(user_id) 
+          bot.register_next_step_handler(user, sg)
 
             
         if call.data == 'check':
@@ -357,7 +346,14 @@ def query_handler(call):
         bot.send_message(call.message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
         return
 
-        
+
+def sg(user1):
+        user = user1
+        ref_id = int(data['referby'][user])
+        ref = str(ref_id)
+        time.sleep(0.5)
+        bot.send_message(
+            str(user), "🚧 <b>You are invited by "+ref+" </b>", parse_mode="html")        
 def ban(message):
     try:
         if message.text == "🚫 Cancel":
