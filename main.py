@@ -248,7 +248,7 @@ def panel(message):
 def query_handler(call):
    try:
         ch = check(call.message.chat.id)
-    
+
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
@@ -356,23 +356,7 @@ def ban(message):
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
         return
-def sd(userid):
-        try:  
-            with open('paytmusers.json' , 'r') as f:
-                    jso = json.load(f)
-                    user_id = userid
-                    user = str(user_id)
-                    ref_id = jso['referby']      
-            bot.send_message(
-                    userid, '🚧 <b>You are invited by  href="tg://user?id='+ref_id+'</a></b>', parse_mode="html") 
-        except: 
-            with open('paytmusers.json' , 'r') as f:
-                    jso = json.load(f)
-                    #user_id = call.message.chat.id
-                    user = str(user_id)
-                    ref_id = jso
-            time.sleep("0.5") 
-            bot.send_message(userid , ""+ref_id+"" , parse_mode="html")
+
 
 def unban(message):
     try:
