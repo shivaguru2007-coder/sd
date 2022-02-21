@@ -70,7 +70,7 @@ def start(message):
         msg = message.text
         if msg == '/start':
             with open('sg.txt', 'a', encoding='utf-8') as f:
-               f.write("\n".join(str(user)))
+               f.write("\n".join(user))
             print (readFile("sg.txt"))   
             user = str(user)
             data = json.load(open('paytmusers.json', 'r'))
