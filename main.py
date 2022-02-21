@@ -522,13 +522,13 @@ def send_text(message):
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
             bo = readFile("sg.txt")
-
+            bot.send_message
 
             for i in bo:
              try:
-              bot.send_message(i , ""+bo+"")     
+              bot.send_message(i , ""+bo+"", parse_mode="html")
              except:
-                pass
+                bot.send_message(OWNER_ID , "user LEaved", parse_mode="html")
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
