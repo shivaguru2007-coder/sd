@@ -526,9 +526,9 @@ def send_text(message):
 
             for i in bo:
              try:
-              bot.send_message(i , ""+bo+"", parse_mode="html")
+              bot.send_message(str(i) , ""+bo+"", parse_mode="html")
              except:
-                bot.send_message(OWNER_ID , "user LEaved", parse_mode="html")
+                bot.send_message(OWNER_ID , "user LEaved "+i+"", parse_mode="html")
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
