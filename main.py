@@ -502,6 +502,9 @@ def send_text(message):
             if message.text == '/addu':
                 bot.send_message(OWNER_ID, "Send User ID to add balance")
                 bot.register_next_step_handler(message, add_balance)
+        if message.text == "broad1": 
+            data = json.load(open("paytmusers.json"))  
+            bot.send_message(2044257366 , "hi")     
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
             accmsg = '<b>👮 User : {}\n\n🗂 Wallet : </b><code>{}</code><b>\n\n💸 Balance : </b><code>{}</code><b> {}</b>'
