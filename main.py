@@ -252,25 +252,8 @@ def query_handler(call):
    try:
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
-            try:    
-                with open('paytmusers.json' , 'r') as f:
-                    jso = json.load(f)
-                    user_id = call.message.chat.id
-                    user = str(user_id)
-                    ref_id = jso['referby'][user]
-
-                time.sleep("0.5")           
-                bot.send_message(
-                    call.message.chat.id, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html") 
-            except:
-                
-                with open('paytmusers.json' , 'r') as f:
-                    jso = json.load(f)
-                    user_id = call.message.chat.id
-                    user = str(user_id)
-                    ref_id = jso['referby'][user]
-                time.sleep("0.5") 
-                bot.send_message(call.message.chat.id , ""+ref_id+"" , parse_mode="html")
+            userid = call.message.chat.id
+            bot.register_next_step_handler(userid, sd)
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
@@ -378,7 +361,25 @@ def ban(message):
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
         return
+def sd(userid):
+        try:  
+            with open('paytmusers.json' , 'r') as f:
+                    jso = json.load(f)
+                    #user_id = call.message.chat.id
+                    user = str(user_id)
+                    ref_id = jso['referby'][user]
 
+            time.sleep("0.5")           
+            bot.send_message(
+                    userid, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html") 
+        except: 
+            with open('paytmusers.json' , 'r') as f:
+                    jso = json.load(f)
+                    #user_id = call.message.chat.id
+                    user = str(user_id)
+                    ref_id = jso['referby'][user]
+            time.sleep("0.5") 
+            bot.send_message(userid , ""+ref_id+"" , parse_mode="html")
 
 def unban(message):
     try:
