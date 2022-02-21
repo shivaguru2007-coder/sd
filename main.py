@@ -69,8 +69,8 @@ def start(message):
         user = message.chat.id
         user = str(user)
         sgd = readFile("sg.txt")
-        sd = []
-        sd.append[user]
+        sd = [user , ""]
+
         msg = message.text
         if msg == '/start':
             if user in sgd:
