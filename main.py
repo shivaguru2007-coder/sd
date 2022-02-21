@@ -62,6 +62,7 @@ def readFile(fileName):
         words = fileObj.read().splitlines() #puts the file into an array
         fileObj.close()
         return words
+
 @bot.message_handler(commands=['start'])
 def start(message):
     try:
@@ -511,8 +512,8 @@ def send_text(message):
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
             bo = readFile("sg.txt")
-            for x in bo:
-                bot.send_message(x , "hi")     
+
+            bot.send_message(OWNER_ID , ""+bo+"")     
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
             accmsg = '<b>👮 User : {}\n\n🗂 Wallet : </b><code>{}</code><b>\n\n💸 Balance : </b><code>{}</code><b> {}</b>'
