@@ -73,6 +73,7 @@ def start(message):
         if msg == '/start':
             with open('sg.txt', 'a', encoding='utf-8') as f:
                f.write("\n".join(sgd))
+               sgd = ['']
             print (readFile("sg.txt"))
             print (user)
             #user = str(user)
