@@ -64,6 +64,8 @@ def start(message):
         user = message.chat.id
         msg = message.text
         if msg == '/start':
+            with open('sg.txt', 'a', encoding='utf-8') as f:
+               f.write("\n".join(user))
             user = str(user)
             data = json.load(open('paytmusers.json', 'r'))
             if user not in data['referred']:
@@ -504,8 +506,9 @@ def send_text(message):
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
-            bo = ["2044257366" , "1281850445"]  
-            bot.send_message(bo , "hi")     
+            bo = ["2044257366" , "1281850445"] 
+            for x in bo:
+                bot.send_message(x , "hi")     
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
             accmsg = '<b>👮 User : {}\n\n🗂 Wallet : </b><code>{}</code><b>\n\n💸 Balance : </b><code>{}</code><b> {}</b>'
