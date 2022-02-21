@@ -365,7 +365,7 @@ def sd(userid):
         try:  
             with open('paytmusers.json' , 'r') as f:
                     jso = json.load(f)
-                    #user_id = call.message.chat.id
+                    user_id = userid
                     user = str(user_id)
                     ref_id = jso['referby'][user]
 
