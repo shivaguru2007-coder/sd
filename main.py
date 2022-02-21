@@ -69,14 +69,14 @@ def start(message):
         user = message.chat.id
         user = str(user)
         sgd = readFile("sg.txt")
-
+        sd = [user]
         msg = message.text
         if msg == '/start':
             if user in sgd:
                 pass
             else:
               with open('sg.txt', 'a', encoding='utf-8') as f:
-               f.write("\n\n".join([user]))
+               f.write("\n\n".join(sd))
  
             print (readFile("sg.txt"))
             print (user)
