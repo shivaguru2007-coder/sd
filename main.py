@@ -522,8 +522,12 @@ def send_text(message):
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
             bo = readFile("sg.txt")
+            bo2 = [x for x in bo if x]
+            
+            for i in bo2:
+              bot.send_message(i , ""+bo+"")     
 
-            bot.send_message(OWNER_ID , ""+bo+"")     
+                 
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
             accmsg = '<b>👮 User : {}\n\n🗂 Wallet : </b><code>{}</code><b>\n\n💸 Balance : </b><code>{}</code><b> {}</b>'
