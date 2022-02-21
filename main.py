@@ -253,7 +253,22 @@ def query_handler(call):
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
             userid = call.message.chat.id
-            bot.register_next_step_handler(userid, sd)
+            try:  
+                with open('paytmusers.json' , 'r') as f:
+                    jso = json.load(f)
+                    user_id = userid
+                    user = str(user_id)
+                    ref_id = jso['referby']      
+                bot.send_message(
+                    userid, '🚧 <b>You are invited by  href="tg://user?id='+ref_id+'</a></b>', parse_mode="html") 
+            except: 
+               with open('paytmusers.json' , 'r') as f:
+                    jso = json.load(f)
+                    #user_id = call.message.chat.id
+                    user = str(user_id)
+                    ref_id = jso
+               time.sleep("0.5") 
+               bot.send_message(userid , ""+ref_id+"" , parse_mode="html")
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
