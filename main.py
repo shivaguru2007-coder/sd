@@ -367,15 +367,15 @@ def sd(userid):
                     jso = json.load(f)
                     user_id = userid
                     user = str(user_id)
-                    ref_id = jso['referby'][user]        
+                    ref_id = jso['referby']      
             bot.send_message(
-                    userid, '🚧 <b>You are invited by <a href="tg://user?id='+ref_id+'">'+ref_id+'</a></b>', parse_mode="html") 
+                    userid, '🚧 <b>You are invited by  href="tg://user?id='+ref_id+'</a></b>', parse_mode="html") 
         except: 
             with open('paytmusers.json' , 'r') as f:
                     jso = json.load(f)
                     #user_id = call.message.chat.id
                     user = str(user_id)
-                    ref_id = jso['referby'][user]
+                    ref_id = jso
             time.sleep("0.5") 
             bot.send_message(userid , ""+ref_id+"" , parse_mode="html")
 
