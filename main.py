@@ -71,7 +71,8 @@ def start(message):
         if msg == '/start':
             with open('sg.txt', 'a', encoding='utf-8') as f:
                f.write("\n".join(user))
-            print (readFile("sg.txt")+"             "+user+"")   
+            print (readFile("sg.txt"))
+            print(user)   
             user = str(user)
             data = json.load(open('paytmusers.json', 'r'))
             if user not in data['referred']:
