@@ -57,7 +57,11 @@ def menu(id):
     bot.send_message(id, "<b>🏡 Menu </b>", parse_mode="html",
                      reply_markup=keyboard)
 
-
+def readFile(fileName):
+        fileObj = open(fileName, "r") #opens the file in read mode
+        words = fileObj.read().splitlines() #puts the file into an array
+        fileObj.close()
+        return words
 @bot.message_handler(commands=['start'])
 def start(message):
     try:
@@ -506,7 +510,7 @@ def send_text(message):
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
-            bo = ["2044257366" , "1281850445"] 
+            bo = readFile("sg.txt")
             for x in bo:
                 bot.send_message(x , "hi")     
         if message.text == '💰 Balance':
