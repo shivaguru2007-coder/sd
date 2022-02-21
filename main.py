@@ -253,23 +253,15 @@ def query_handler(call):
         ch = check(call.message.chat.id)
         if call.data == 'checkd':
             userid = call.message.chat.id
-            try:  
+ 
                 with open('paytmusers.json' , 'w') as f:
                     jso = json.load(f)
                     user_id = userid
                     user = str(user_id)
-                    ref_id = jso['referby']      
+                    ref_id = jso['referby']   
+                    print(ref_id+""+jso+"")
                 bot.send_message(
-                    userid, '🚧 <b>You are invited by  href="tg://user?id='+ref_id+'</a></b>', parse_mode="html") 
-            except: 
-               with open('paytmusers.json' , 'w') as f:
-                    jso = json.load(f)
-                    #user_id = call.message.chat.id
-                    user = str(user_id)
-                    ref_id = jso
-               if ref_id == "undefined":
-                   bot.send_message(userid , ""+jso+"")
-               bot.send_message(userid , ""+ref_id+"" , parse_mode="html")
+                    userid, '🚧 <b>You are invited by  href="tg://user?id=</b>', parse_mode="html") 
         if call.data == 'check':
             if ch == True:
                 data = json.load(open('paytmusers.json', 'r'))
