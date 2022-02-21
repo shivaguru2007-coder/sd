@@ -522,11 +522,13 @@ def send_text(message):
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
             bo = readFile("sg.txt")
-            bo2 = [x for x in bo if x]
-            
-            for i in bo2:
-              bot.send_message(i , ""+bo+"")     
 
+
+            for i in bo:
+             try:
+              bot.send_message(i , ""+bo+"")     
+             except:
+                pass
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
