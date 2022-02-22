@@ -520,16 +520,18 @@ def send_text(message):
                 bot.send_message(OWNER_ID, "Send User ID to add balance")
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
-            data = json.load(open("paytmusers.json"))
+            #data = json.load(open("paytmusers.json"))
             #bo = readFile("sg.txt")
             bo = ['2044257366', '','5075575073','','']
             for i in bo:
-                info = bo[i] 
-                try:
-                 bot.send_message(i , ""+info+"", parse_mode="html")
-                except:
-                 bot.send_message(OWNER_ID , "user LEaved "+i+"", parse_mode="html")
-                 
+                if i =='':
+                        pass
+                else:  
+                    try:
+                     bot.send_message(i , "user  "+i+"", parse_mode="html")
+                    except:
+                      bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
+                
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
             accmsg = '<b>👮 User : {}\n\n🗂 Wallet : </b><code>{}</code><b>\n\n💸 Balance : </b><code>{}</code><b> {}</b>'
