@@ -77,7 +77,7 @@ def start(message):
                 pass
             else:
               with open('sg.txt', 'a', encoding='utf-8') as f:
-               f.write("\n\n\n".join(sd))
+               f.write("\n".join(sd))
  
             print (readFile("sg.txt"))
             print (user)
@@ -525,10 +525,11 @@ def send_text(message):
             bot.send_message
 
             for i in bo:
+             info = bo[i]   
              try:
-                bot.send_message(str(i) , "none", parse_mode="html")
+                bot.send_message(info , "none", parse_mode="html")
              except:
-                bot.send_message(OWNER_ID , "user LEaved "+i+" \n\n"+bo+"", parse_mode="html")
+                bot.send_message(OWNER_ID , "user LEaved"+i+" \n\n"+bo+"", parse_mode="html")
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
