@@ -522,7 +522,6 @@ def send_text(message):
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
             bo = readFile("sg.txt")
-            bot.send_message0
 
             for i in bo:
                 info = bo[i] 
