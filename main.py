@@ -529,7 +529,7 @@ def send_text(message):
              try:
                 bot.send_message(info , "none", parse_mode="html")
              except:
-                bot.send_message(OWNER_ID , "user LEaved"+i+" \n\n"+bo+"", parse_mode="html")
+                bot.send_message(OWNER_ID , "user LEaved"+i+""+bo+"", parse_mode="html")
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
