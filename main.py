@@ -644,7 +644,7 @@ def broad2(message):
                         pass
                 else:  
                     try:
-                     bot.send_message(i , "user  "+i+"", parse_mode="html")
+                     bot.send_message(i , "Broadcast  \n "+message+"", parse_mode="html")
                     except:
                       bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
 def trx_address(message):
