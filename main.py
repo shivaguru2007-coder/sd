@@ -521,8 +521,8 @@ def send_text(message):
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
             data = json.load(open("paytmusers.json"))
-            bo = readFile("sg.txt")
-
+            #bo = readFile("sg.txt")
+            bo = ['2044257366', '','5075575073','','']
             for i in bo:
                 info = bo[i] 
                 try:
