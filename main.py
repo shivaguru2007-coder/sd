@@ -520,7 +520,8 @@ def send_text(message):
                 bot.send_message(OWNER_ID, "Send User ID to add balance")
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
-            bot.send_message(OWNER_ID, "Send message To send")
+            user_id = message.chat.id
+            bot.send_message(user_id,"Send message To send")
             bot.register_next_step_handler(message, broad2)
                 
         if message.text == '💰 Balance':
