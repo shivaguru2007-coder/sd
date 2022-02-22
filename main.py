@@ -645,7 +645,7 @@ def broad2(message):
                 else:  
                     try:
                      time.sleep(0.5)   
-                     bot.send_message(int(i), "Broadcast  \n "+message+"", parse_mode="html")
+                     bot.send_message(int(i), "Broadcast  \n "+message.text+"", parse_mode="html")
                     except:
                       bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
 def trx_address(message):
