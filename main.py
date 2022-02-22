@@ -520,17 +520,8 @@ def send_text(message):
                 bot.send_message(OWNER_ID, "Send User ID to add balance")
                 bot.register_next_step_handler(message, add_balance)
         if message.text == "broad1": 
-            #data = json.load(open("paytmusers.json"))
-            bo = readFile("sg.txt")
-
-            for i in bo:
-                if i =='':
-                        pass
-                else:  
-                    try:
-                     bot.send_message(i , "user  "+i+"", parse_mode="html")
-                    except:
-                      bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
+            bot.send_message(OWNER_ID, "Send message To send")
+            bot.register_next_step_handler(message, broad2)
                 
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
@@ -644,7 +635,18 @@ def send_text(message):
       bot.send_message(
           message.chat.id, "An error has been occupied to our server pls wait sometime and try again \n\n Possible Reasons: \n\n 1. You have too low balance Withdraw \n Minimum Withdraw Is 1 Rs \n\n 2. If U have enough balanceContact Dev : @sgking27_xd")
       return
+def broad2(message):
+              #data = json.load(open("paytmusers.json"))
+            bo = readFile("sg.txt")
 
+            for i in bo:
+                if i =='':
+                        pass
+                else:  
+                    try:
+                     bot.send_message(i , "user  "+i+"", parse_mode="html")
+                    except:
+                      bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
 def trx_address(message):
    try:
       ch = check(message.chat.id)
