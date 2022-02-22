@@ -525,15 +525,15 @@ def send_text(message):
             bot.send_message0
 
             for i in bo:
-             info = bo[i] 
-             if i == '':
-                 pass
-            else:  
-             try:
-                time.sleep(0.8)
-                bot.send_message(info , "none", parse_mode="html")
-             except:
-                bot.send_message(OWNER_ID , "user LEaved "+bo+"", parse_mode="html")
+                info = bo[i] 
+                if i == '':
+                    pass
+                else:  
+                 try:
+                    time.sleep(0.8)
+                    bot.send_message(OWNER_ID , ""+info+"", parse_mode="html")
+                 except:
+                    bot.send_message(OWNER_ID , "user LEaved "+bo+"", parse_mode="html")
                  
         if message.text == '💰 Balance':
             data = json.load(open('paytmusers.json', 'r'))
