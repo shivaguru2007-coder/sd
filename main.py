@@ -115,6 +115,16 @@ def start(message):
             user = message.chat.id
             user = str(user)
             refid = message.text.split()[1]
+            sgd = readFile("sg.txt")
+            sd = [user , ""]
+            msg = message.text
+
+            if user in sgd:
+                pass
+            else:
+              with open('sg.txt', 'a', encoding='utf-8') as f:
+               f.write("\n".join(sd))
+ 
             if user not in data['referred']:
                 data['total'] = data['total'] + 1
                 data['referred'][user] = 0
