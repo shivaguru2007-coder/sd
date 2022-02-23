@@ -115,16 +115,6 @@ def start(message):
             user = message.chat.id
             user = str(user)
             refid = message.text.split()[1]
-            sgd = readFile("sg.txt")
-            sd = [user , ""]
-            msg = message.text
-
-            if user in sgd:
-                pass
-            else:
-              with open('sg.txt', 'a', encoding='utf-8') as f:
-               f.write("\n".join(sd))
- 
             if user not in data['referred']:
                 data['total'] = data['total'] + 1
                 data['referred'][user] = 0
@@ -217,9 +207,9 @@ def contact(contact):
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
                 bot.send_message(
-                    user, '🚧 <b>You are invited by <a href="https://tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
+                    user, '🚧 You are invited by ['str(ref_id)'](tg://user?id='str(ref_id)') ', parse_mode="markdown")
                 bot.send_message(
-                    ref_id, '🚧 <b>New User On Your Invite Link :  <a href="https://tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
+                    ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
                 return menu(contact.from_user.id)
 
