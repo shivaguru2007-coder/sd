@@ -207,7 +207,7 @@ def contact(contact):
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
                 bot.send_message(
-                    user, '🚧 You are invited by ['str(ref_id)'](tg://user?id='str(ref_id)') ', parse_mode="markdown")
+                    user, '🚧 You are invited by ['+str(ref_id)+'](tg://user?id='+str(ref_id)+') ', parse_mode="markdown")
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
