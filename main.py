@@ -182,6 +182,7 @@ def contact(contact):
     if number == '+91' or numberphone == "91":
         data = json.load(open('paytmusers.json', 'r'))
         user_id = contact.from_user.id
+        username = contact.from_user.username
         user = str(user_id)
         bot.delete_message(contact.from_user.id, contact.message_id)
         data['contact'][user] = True
@@ -207,7 +208,7 @@ def contact(contact):
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
                 bot.send_message(
-                    user, '🚧 <b>You are invited by <a href="https://tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
+                    user, '🚧 <b>You are invited by <a href="https://tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a> \n User Name : '+username+'</b>', parse_mode="html")
                 bot.send_message(
                     ref_id, '🚧 <b>New User On Your Invite Link :  <a href="https://tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
