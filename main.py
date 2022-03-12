@@ -6,11 +6,11 @@ import requests
 
 TOKEN = "Rupees "
 
-BOT_TOKEN = "5049149165:AAEA95mYTUzazaewU4sp9ouk5GrIMUkjTxk"
+BOT_TOKEN = "5111462275:AAHa9f2-Kng-lRog83eb471cMoWv2tgrGLE"
 
-PAYMENT_CHANNEL = "@sglooter"
+PAYMENT_CHANNEL = "@sgking27here"
 OWNER_ID = 2044257366
-CHANNELS = ["@sglooter"]
+CHANNELS = ["@sgking27here"]
 Mini_Withdraw = 1
 Paytmkeys = "key"
 mid = "key"
@@ -104,7 +104,7 @@ def start(message):
             if user not in data['id']:
                 data['id'][user] = data['total']+1
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.5)
+            #time.sleep(0.5)
             markup = telebot.types.InlineKeyboardMarkup()
             markup.add(telebot.types.InlineKeyboardButton(
                 text='☑️ Joined ', callback_data='check'))
@@ -112,8 +112,22 @@ def start(message):
                              parse_mode="html", reply_markup=markup)
         else:
             data = json.load(open('paytmusers.json', 'r'))
+
             user = message.chat.id
             user = str(user)
+            sgd = readFile("sg.txt")
+            sd = [user , ""]
+
+            msg = message.text
+            if msg == '/start':
+                if user in sgd:
+                    pass
+                else:
+                    with open('sg.txt', 'a', encoding='utf-8') as f:
+                       f.write("\n".join(sd))
+    
+            print (readFile("sg.txt"))
+            print (user)
             refid = message.text.split()[1]
             if user not in data['referred']:
                 data['total'] = data['total'] + 1
@@ -134,7 +148,7 @@ def start(message):
             if user not in data['id']:
                 data['id'][user] = data['total']+1
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.5)
+            #time.sleep(0.5)
             ap = json.load(open('panel.json', 'r'))
             msg_tart = str(ap['msgstart'])
             markups = telebot.types.InlineKeyboardMarkup()
@@ -182,7 +196,6 @@ def contact(contact):
     if number == '+91' or numberphone == "91":
         data = json.load(open('paytmusers.json', 'r'))
         user_id = contact.from_user.id
-        username = contact.from_user.username
         user = str(user_id)
         bot.delete_message(contact.from_user.id, contact.message_id)
         data['contact'][user] = True
@@ -199,7 +212,7 @@ def contact(contact):
                     data['balance'][ref] = 0
                 if ref not in data['referred']:
                     data['referred'][ref] = 0
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
                 botdata = json.load(open('panel.json', 'r'))
                 Per_Refer = float(round( random.uniform(0.5 , 0.75),2))
@@ -208,9 +221,9 @@ def contact(contact):
                 markups = telebot.types.InlineKeyboardMarkup()
                 markups.add(telebot.types.InlineKeyboardButton(text='✅ Check', callback_data='checkd'))
                 bot.send_message(
-                    user, '🚧 <b>You are invited by <a href="https://tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a> \n User Name : '+username+'</b>', parse_mode="html")
+                    user, '🚧 <b>You are invited by <a href="tg://user?id='+str(ref_id)+'">'+str(ref_id)+'</a></b>', parse_mode="html")
                 bot.send_message(
-                    ref_id, '🚧 <b>New User On Your Invite Link :  <a href="https://tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
+                    ref_id, '🚧 <b>New User On Your Invite Link :  <a href="tg://user?id='+str(user)+'">'+str(user)+'</a>\n💰 +'+str(Per_Refer)+' '+str(TOKEN)+' Added To Your Balance</b>', parse_mode="html")
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
                 return menu(contact.from_user.id)
 
@@ -293,24 +306,27 @@ def query_handler(call):
                                 parse_mode="html", reply_markup=markup)
                         
         if call.data.split("_")[0] == 'confirmwith':
-            message = call.message
-            user_id = message.chat.id
-            user = str(user_id)
-            data = json.load(open('paytmusers.json', 'r'))
-            amount = float(call.data.split("_")[1])
-            wallet = str(data['wallet'][user])
-            response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"")
-    #            asd = response['status']
-    #            if asd == "fail":
-            data['balance'][user] -= float(amount)
-            data['totalwith'] += float(amount)
-            json.dump(data, open('paytmusers.json', 'w'))
-            time.sleep(0.8)
-    #            cur_time2 = int((time.time()))
-    #            withdraw[user_id] = cur_time2
-            bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!")
-            bot.send_message(PAYMENT_CHANNEL, "❣️ <b>New withdraw successfully!!\n\n🍕 Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username, parse_mode="html")
-            return menu(message.chat.id)
+            try:
+                message = call.message
+                user_id = message.chat.id
+                user = str(user_id)
+                data = json.load(open('paytmusers.json', 'r'))
+                amount = float(call.data.split("_")[1])
+                wallet = str(data['wallet'][user])
+
+                response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"info="+bot.get_me().username+"")
+                #asd = response['status']
+                data['balance'][user] -= float(amount)
+                data['totalwith'] += float(amount)
+                json.dump(data, open('paytmusers.json', 'w'))
+                #time.sleep(0.8)
+        #            cur_time2 = int((time.time()))
+        #            withdraw[user_id] = cur_time2
+                bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!",parse_mode="html")
+                bot.send_message(PAYMENT_CHANNEL, "<b>🏧NEW WITHDRAW DONE SUCCESSFULLY🏦\n\n🍕 \n\n 💰 Status = SUCCESSFULLY PAID \n\n Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username+"⚡️KEEP SHARING AND ENJOYING OUR BOTS😉😊✅\n\n@Thefirenetwork🔥\n\n@Thefirebots 🔥", parse_mode="html")
+                return menu(message.chat.id)
+            except:
+                bot.send_message(message.chat.id, ".menu", parse_mode="Markdown")
     #            else:
     #                bot.send_message(
     #                    user_id, "WE HAVE PAID YOUR WITHDRAW PLEASE WAIT 1-2 MINUTES.")
@@ -369,7 +385,7 @@ def ban(message):
         bot.send_message(message.chat.id, "User successfully banned")
         data['banned'].append(message.text)
         json.dump(data, open('panel.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
@@ -384,7 +400,7 @@ def unban(message):
         bot.send_message(message.chat.id, "User successfully Unbanned")
         data['banned'].remove(message.text)
         json.dump(data, open('panel.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "This user is may not banned if you not sure you can contact our dev @SGking27_xd")
@@ -402,7 +418,7 @@ def add_balance(message):
             data = json.load(open('panel.json', 'r'))
             data['addto'] = message.text
             json.dump(data, open('panel.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             bot.send_message(message.chat.id, "Send amount to add balance")
             bot.register_next_step_handler(message, addbalance)
     except:
@@ -421,7 +437,7 @@ def cut_balance(message):
             data = json.load(open('panel.json', 'r'))
             data['addto'] = message.text
             json.dump(data, open('panel.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             bot.send_message(message.chat.id, "Send amount to cut balance")
             bot.register_next_step_handler(message, cutbalance)
     except:
@@ -437,7 +453,7 @@ def addbalance(message):
         data = json.load(open('paytmusers.json', 'r'))
         data['balance'][data2['addto']] += float(message.text)
         json.dump(data, open('paytmusers.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
@@ -453,7 +469,7 @@ def cutbalance(message):
         data = json.load(open('paytmusers.json', 'r'))
         data['balance'][data2['addto']] -= float(message.text)
         json.dump(data, open('paytmusers.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime adn try again")
@@ -469,7 +485,7 @@ def set_bonus(message):
             message.chat.id, "New bonus amount is set successfully")
         data['bonus'] = float(message.text)
         json.dump(data, open('panel.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
@@ -501,7 +517,7 @@ def add_admins(message):
             message.chat.id, "Admin successfully added You can remove it by editing panel.json file in your server")
         data['admins'].append(message.text)
         json.dump(data, open('panel.json', 'w'), indent=4)
-        time.sleep(0.8)
+        #time.sleep(0.8)
     except:
         bot.send_message(
             message.chat.id, "An error has been occupied to our server pls wait sometime and try again")
@@ -537,7 +553,7 @@ def send_text(message):
                 data['wallet'][user] = "none" 
 
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             balance = data['balance'][user]
             wallet = data['wallet'][user]
             msg = accmsg.format(message.from_user.first_name,
@@ -554,7 +570,7 @@ def send_text(message):
             if user not in data['referred']:
                 data['referred'][user] = 0
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             ref_count = data['referred'][user]
             ref_link = 'https://t.me/'+str(bot_name)+'?start='+str(message.chat.id)
             ref_msg = "<b>🙌🏻 Total Invites : "+str(ref_count)+" Users\n\n👥 Refferrals System\n\n🙇 Per Refer :-  "+str(Per_Refer)+" "+str(TOKEN)+"\n\n🔗 Referral Link ⬇️\n"+str(ref_link)+"</b>"
@@ -581,7 +597,7 @@ def send_text(message):
                     user_id, "<b>Congrats you just received "+str(Daily_bonus)+" Paytm CASH</b>", parse_mode="html")
                 bonus[user_id] = cur_time
                 json.dump(data, open('paytmusers.json', 'w'), indent=4)
-                time.sleep(0.8)
+                #time.sleep(0.8)
             else:
                 bot.send_message(
                     message.chat.id, "<b>❌You can only take bonus once every 24 hours!</b>", parse_mode="html")
@@ -608,7 +624,7 @@ def send_text(message):
             if user not in data['wallet']:
                 data['wallet'][user] = "none"
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             bal = data['balance'][user]
             wall = data['wallet'][user]
             if wall == "none":
@@ -646,7 +662,7 @@ def broad2(message):
                         pass
                 else:  
                     try:
-                     time.sleep(0.5)   
+                     #time.sleep(0.5)   
                      bot.send_message(int(i), "Broadcast  \n "+message.text+"", parse_mode="html")
                     except:
                       bot.send_message(OWNER_ID , "user Leaved "+i+"", parse_mode="html")
@@ -664,7 +680,7 @@ def trx_address(message):
             bot.send_message(message.chat.id, "<b>💹 Your paytm wallet set to " +
                              data['wallet'][user]+"</b>", parse_mode="html")
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             return menu(message.chat.id)
         else:
             bot.send_message(
@@ -706,10 +722,10 @@ def amo_with(message):
             if user not in data['wallet']:
                 data['wallet'][user] = "none"
             json.dump(data, open('paytmusers.json', 'w'), indent=4)
-            time.sleep(0.8)
+            #time.sleep(0.8)
             bal = data['balance'][user]
             wall = data['wallet'][user]
-            msg = message.text
+            #msg = message.text
             if float(message.text) > float(bal):
                 bot.send_message(
                     user_id, "<i>❌ You Can't withdraw More than Your Balance</i>", parse_mode="html")
@@ -717,7 +733,8 @@ def amo_with(message):
             bot.send_message(
                 message.chat.id, "Initiating Transaction\n<b>Please wait.</b>", parse_mode="html")
             amount = float(amo)
-            mess = "<i>For, A success withdrawal You need to confirm the Withdrawal</i>\n\n⚠️ <b>You are Withdrawing</b> "+str(format(float(amo), '.8f'))+" <b>Paytm Cash</b> to the \n<code>"+str(wall)+"</code> <b>Paytm wallet\n\n✅ Please Check the Withdraw details Before <u>Confirm the withdraw</u></b>"
+            mess = "        ‼️WITHDRAW CONFIRMATION ‼️ \n\n🏧 Amount of withdraw 👉 "+str(format(float(amo), '.8f'))+"\n🏦 PAYTM NO. 👉 "+str(wall)+"\n\nPlease Check the Withdraw details🙏🙏 Before Confirming the withdraw🙂\n\nHAPPY LOOTS🤘🔥"
+            #mess = "<i>For, A success withdrawal You need to confirm the Withdrawal</i>\n\n⚠️ <b>You are Withdrawing</b> "+str(format(float(amo), '.8f'))+" <b>Paytm Cash</b> to the \n<code>"+str(wall)+"</code> <b>Paytm wallet\n\n✅ Please Check the Withdraw details Before <u>Confirm the withdraw</u></b>"
             markup = telebot.types.InlineKeyboardMarkup()
             markup.add(telebot.types.InlineKeyboardButton(text='✅ Confirm Withdraw', callback_data='confirmwith_'+str(amo)))
             bot.send_message(user,mess,parse_mode='html',reply_markup=markup)
