@@ -9,14 +9,14 @@ TOKEN = "Rupees "
 BOT_TOKEN = "5111462275:AAHa9f2-Kng-lRog83eb471cMoWv2tgrGLE"
 
 PAYMENT_CHANNEL = "@sgking27here"
-OWNER_ID = 2044257366
+OWNER_ID = 1281850445
 CHANNELS = ["@sgking27here"]
 Mini_Withdraw = 1
 Paytmkeys = "key"
 mid = "key"
 paytmtoken = "key"
 ref_id =  ''
-Maxwith = telebot.types.ReplyKeyboardMarkup(True)
+Maxwith = telebot.types.ReplyKeyboardMarkup(True)1281850445
 Maxwith.row('🚫 Cancel') 
 
 botdata = json.load(open('panel.json', 'r'))
