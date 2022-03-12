@@ -313,7 +313,7 @@ def query_handler(call):
                 data = json.load(open('paytmusers.json', 'r'))
                 amount = float(call.data.split("_")[1])
                 wallet = str(data['wallet'][user])
-
+                
                 response = requests.get("https://job2all.xyz/api/index.php?mid=&mkey=&guid=&mob="+str(wallet)+"&amount="+str(amount)+"info="+bot.get_me().username+"")
                 #asd = response['status']
                 data['balance'][user] -= float(amount)
@@ -325,7 +325,7 @@ def query_handler(call):
                 bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!",parse_mode="html")
                 bot.send_message(PAYMENT_CHANNEL, "<b>🏧NEW WITHDRAW DONE SUCCESSFULLY🏦</b>/n/n💰 Status = SUCCESSFULLY PAID/n👨 User = "+str(message.chat.firstname)+"/n🚧 USERNAME = @"+str(message.chat.username)+"/n🤑 AMOUNT = "+str(amount)+"  /n/n🤖 BOT = @/n/n⚡️KEEP SHARING AND LOOTING GUYS😉😊✅\n\n _-_-_-_-_-_- ⚜️JOIN NOW ⚜️ -_-_-_-_-_-_\n\n❍❍❍❖ @TheFirenetwork 🔥 ❖❍❍❍\n\n❍❍❍❖ @Thefirebots  ❖❍❍❍🔥🔥", parse_mode="html")
             
-                return menu(message.chat.id)
+                return menu(user_id)
             except:
                 bot.send_message(message.chat.id, ".menu", parse_mode="Markdown")
     #            else:
