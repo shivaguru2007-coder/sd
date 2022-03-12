@@ -6,10 +6,10 @@ import requests
 
 TOKEN = "Rupees "
 
-BOT_TOKEN = "5111462275:AAHa9f2-Kng-lRog83eb471cMoWv2tgrGLE"
+BOT_TOKEN = ""
 
 PAYMENT_CHANNEL = "@sgking27here"
-OWNER_ID = 1281850445
+OWNER_ID = 2044257366
 CHANNELS = ["@sgking27here"]
 Mini_Withdraw = 1
 Paytmkeys = "key"
@@ -323,7 +323,13 @@ def query_handler(call):
         #            cur_time2 = int((time.time()))
         #            withdraw[user_id] = cur_time2
                 bot.edit_message_text(chat_id=user, message_id=call.message.message_id, text="✅ Withdrawl initiated successfully!",parse_mode="html")
-                bot.send_message(PAYMENT_CHANNEL, "<b>🏧NEW WITHDRAW DONE SUCCESSFULLY🏦\n\n🍕 \n\n 💰 Status = SUCCESSFULLY PAID \n\n Amount</b> : "+str(amount)+" <b>Paytm Cash \n🥪 User</b> : "+str(message.chat.username)+"\n\n🍔 <b>Bot</b> : @"+bot.get_me().username+"⚡️KEEP SHARING AND ENJOYING OUR BOTS😉😊✅\n\n@Thefirenetwork🔥\n\n@Thefirebots 🔥", parse_mode="html")
+                bot.send_message(PAYMENT_CHANNEL, "<b>🏧NEW WITHDRAW DONE SUCCESSFULLY🏦</b>/n/n💰 Status = SUCCESSFULLY PAID/n👨 User = "+str(message.chat.firstname)+"/n🚧 USERNAME = @"+str(message.chat.username)+"/n🤑 AMOUNT = "+str(amount)+"  /n/n🤖 BOT = @/n/n⚡️KEEP SHARING AND LOOTING GUYS😉😊✅", parse_mode="html")
+            
+
+
+_-_-_-_-_-_- ⚜️JOIN NOW ⚜️ -_-_-_-_-_-_
+❍❍❍❖ @TheFirenetwork 🔥 ❖❍❍❍
+❍❍❍❖ @Thefirebots  ❖❍❍❍🔥🔥
                 return menu(message.chat.id)
             except:
                 bot.send_message(message.chat.id, ".menu", parse_mode="Markdown")
