@@ -16,7 +16,7 @@ Paytmkeys = "key"
 mid = "key"
 paytmtoken = "key"
 ref_id =  ''
-Maxwith = telebot.types.ReplyKeyboardMarkup(True)1281850445
+Maxwith = telebot.types.ReplyKeyboardMarkup(True)
 Maxwith.row('🚫 Cancel') 
 
 botdata = json.load(open('panel.json', 'r'))
